@@ -1,0 +1,12 @@
+@media (max-width: 700px) {
+  .card-tasks {
+    width: 400px !important;
+  }
+}
+.task-card:hover {
+  padding: 25px 10px;
+}
+.btnActive {
+  background-color: rgba(96, 125, 139, 0.1) !important;
+  border: 1px solid #607d8b !important;
+}
