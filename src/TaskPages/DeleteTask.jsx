@@ -9,6 +9,7 @@ export default function DeleteTask({setDeleteTask,elId}) {
     task.id !== elId
     ) 
     setTasks(deleteTask)
+    localStorage.setItem("tasks", JSON.stringify(deleteTask));
     setDeleteTask(false)
   }
   return (

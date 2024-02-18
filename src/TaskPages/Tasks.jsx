@@ -13,18 +13,19 @@ import { TasksContext } from "../context/TasksContext";
 let generateId = 3;
 
 export default function Tasks() {
-  const { setTasks } = useContext(TasksContext);
+  const { tasks, setTasks } = useContext(TasksContext);
   const [taskTitle, setTaskTitle] = useState("");
   const [filterTasks, setFilterTasks] = useState("all");
 
   function addNewTask() {
+    const addTask = [
+      ...tasks,
+      { id: generateId++, title: taskTitle, content: "", done: false },
+    ];
     if (taskTitle !== "") {
-      setTasks((prev) => [
-        ...prev,
-        { id: generateId++, title: taskTitle, content: "", done: false },
-      ]);
+      setTasks(addTask);
+      localStorage.setItem("tasks", JSON.stringify(addTask));
     }
-    console.log(generateId);
     setTaskTitle("");
   }
 
@@ -44,7 +45,7 @@ export default function Tasks() {
           Tasks
         </Typography>
         <Divider sx={{ width: "100%", mb: 3 }} />
-        <ButtonGroup variant="outlined">
+        <ButtonGroup variant="outlined" >
           <Button
             className={filterTasks === "all" ? "btnActive" : ""}
             onClick={() => setFilterTasks("all")}
@@ -67,7 +68,7 @@ export default function Tasks() {
         {/* Array Tasks */}
         <TaskCard {...{ filterTasks }} />
         {/* Add Task Input */}
-        <Box className="flex" sx={{ width: "100%",mt:3 }}>
+        <Box className="flex" sx={{ width: "100%", mt: 3 }}>
           <TextField
             sx={{ flexGrow: "1.5" }}
             label="Task Title"
@@ -79,6 +80,7 @@ export default function Tasks() {
             sx={{ flexGrow: "1", height: "55px", ml: "10px" }}
             variant="contained"
             onClick={addNewTask}
+            disabled={taskTitle === ""}
           >
             Add
           </Button>

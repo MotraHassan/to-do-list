@@ -28,6 +28,8 @@ export default function TaskCard({filterTasks}) {
       }
     })
     setTasks(editDone)
+    localStorage.setItem("tasks", JSON.stringify(editDone));
+
   }
   const filteredTasks = tasks.filter((el) => {
     if (filterTasks === 'all') {

@@ -19,6 +19,7 @@ export default function EditTask({ setEditTask, elId,setPopUp }) {
       }
     })
     setTasks(editTask);
+    localStorage.setItem("tasks", JSON.stringify(editTask));
     setEditTask(false);
     setPopUp(true)
     setTimeout(()=>{
